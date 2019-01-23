@@ -29,6 +29,9 @@ namespace Lab1
                     case MainMenuOptions.AddMovie:
                         AddMovie();
                         break;
+                    case MainMenuOptions.AddAlbum:
+                        AddAlbum();
+                        break;
                     case MainMenuOptions.AddBook:
                         AddBook();
                         break;
@@ -83,6 +86,41 @@ namespace Lab1
             {
                 Movie myMovie = new Movie(movieID, movieTitle, moviePublisher, movieCreator, moviePublishDate, movieRunLength, movieRating);
                 MediaDb.Add(myMovie);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unknow error has occured: {ex.Message}");
+            }
+
+        }
+
+        static void AddAlbum()
+        {
+            int albumID = ConsoleHelpers.ReadInt("Enter album ID: ", 1, 999999999);
+            string albumTitle = ConsoleHelpers.ReadString("Enter album title: ", 1);
+            string albumPublisher = ConsoleHelpers.ReadString("Enter album publisher: ", 1);
+            string albumCreator = ConsoleHelpers.ReadString("Enter artist: ", 1);
+            DateTime albumPublishDate = ConsoleHelpers.ReadDate("Enter release date: ", DateTime.Parse("1/1/1857"), DateTime.Now);
+            int albumRunLength = ConsoleHelpers.ReadInt("Enter run length: ", 1);
+
+            //Show media types and prompt user to select
+            Console.WriteLine("Media types:");
+            foreach (var mediaType in Enum.GetValues(typeof(AlbumMediaType)))
+            {
+                Console.WriteLine($"\t[{(int)mediaType}] - {mediaType}");
+            }
+            AlbumMediaType albumMediaType = (AlbumMediaType)ConsoleHelpers.ReadInt("Value: ", 0, 4);
+
+            // try to create a new Movie object and add to MediaDb list
+            try
+            {
+                Album myAlbum = new Album(albumID, albumTitle, albumPublisher, albumCreator, albumPublishDate, albumRunLength, albumMediaType);
+                MediaDb.Add(myAlbum);
             }
             catch (ArgumentException ex)
             {
