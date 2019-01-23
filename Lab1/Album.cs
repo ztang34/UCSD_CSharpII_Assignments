@@ -112,14 +112,13 @@ namespace Lab1
             set
             {
 
-
-                if (DateTime.Compare(value, DateTime.Now) < 0) // Movie publish data should not be in the future
+                if (DateTime.Compare(value, DateTime.Now) < 0 && DateTime.Compare(value, DateTime.Parse("1/1/1857"))>0) // Album publish data should be between 1857 (earlisted known recorded sound) and current date
                 {
                     _PublishDate = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Publish data cannot be in the future!", "PublishDate");
+                    throw new ArgumentException("Publish data cannot be earlier than Jan 1, 1857 or in the future!", "PublishDate");
                 }
 
             }
