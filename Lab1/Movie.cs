@@ -73,7 +73,7 @@ namespace Lab1
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    _Title = value;
+                    _Publisher = value;
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace Lab1
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    _Title = value;
+                    _Creator = value;
                 }
                 else
                 {
@@ -171,7 +171,7 @@ namespace Lab1
 
         public void Print()
         {
-            Console.Write($"Movie:{ID,9}{Title,-25}{Publisher,20}{Creator,-20}{PublishDate:yyyy-mm-dd} (Age: {GetAge()}) {RunLength,4}{Rating}");
+            Console.Write($"Movie:{ID,9}  {Title,-25}  {Publisher,-20}{Creator,-20}{PublishDate:yyyy-MM-dd} (Age: {GetAge()}) {RunLength,4}  {Rating}");
         }
     }
 }
