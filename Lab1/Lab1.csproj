@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="ConsoleHelpers.cs" />
     <Compile Include="IMedia.cs" />
