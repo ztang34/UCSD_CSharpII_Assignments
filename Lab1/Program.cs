@@ -29,6 +29,9 @@ namespace Lab1
                     case MainMenuOptions.AddMovie:
                         AddMovie();
                         break;
+                    case MainMenuOptions.AddBook:
+                        AddBook();
+                        break;
                     default:
                         break;
                 }
@@ -55,11 +58,12 @@ namespace Lab1
             foreach (IMedia item in MediaDb)
             {
                 item.Print();
+                Console.WriteLine();
             }
         }
         static void AddMovie ()
         {
-            int movieID = ConsoleHelpers.ReadInt("Enter movie ID: ", 1);
+            int movieID = ConsoleHelpers.ReadInt("Enter movie ID: ", 1, 999999999);
             string movieTitle = ConsoleHelpers.ReadString("Enter movie title: ", 1);
             string moviePublisher = ConsoleHelpers.ReadString("Enter movie producer/publisher: ", 1);
             string movieCreator = ConsoleHelpers.ReadString("Enter movie screenwriter: ", 1);
@@ -79,6 +83,33 @@ namespace Lab1
             {
                 Movie myMovie = new Movie(movieID, movieTitle, moviePublisher, movieCreator, moviePublishDate, movieRunLength, movieRating);
                 MediaDb.Add(myMovie);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unknow error has occured: {ex.Message}");
+            }
+
+        }
+
+        static void AddBook()
+        {
+            int bookID = ConsoleHelpers.ReadInt("Enter book ID: ", 1, 999999999);
+            string bookTitle = ConsoleHelpers.ReadString("Enter book title: ", 1);
+            string bookPublisher = ConsoleHelpers.ReadString("Enter book publisher: ", 1);
+            string bookAuthor = ConsoleHelpers.ReadString("Enter book author: ", 1);
+            DateTime bookPublishDate = ConsoleHelpers.ReadDate("Enter release date: ", DateTime.MinValue, DateTime.Now); //any date in the past is allowed
+            int bookPageNumber = ConsoleHelpers.ReadInt("Enter page: ", 1);
+
+            // try to create a new book object and add to MediaDb list
+            try
+            {
+                Book myBook = new Book(bookID, bookTitle, bookPublisher, bookAuthor, bookPublishDate, bookPageNumber);
+                MediaDb.Add(myBook);
             }
             catch (ArgumentException ex)
             {
