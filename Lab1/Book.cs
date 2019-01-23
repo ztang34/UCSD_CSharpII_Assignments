@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class Book
+    class Book : IMedia
     {
         private int _ID = 0;
         private string _Title = string.Empty;
