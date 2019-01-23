@@ -74,6 +74,7 @@ namespace Lab1
             }
             MovieRating movieRating = (MovieRating)ConsoleHelpers.ReadInt("Value: ", 0, 5);
 
+            // try to create a new Movie object and add to MediaDb list
             try
             {
                 Movie myMovie = new Movie(movieID, movieTitle, moviePublisher, movieCreator, moviePublishDate, movieRunLength, movieRating);
