@@ -161,7 +161,7 @@ namespace Lab1
 
         public void Print()
         {
-            Console.Write($"Book:{ID,9}  {Title,-25}  {Publisher,-20}{Creator,-20}{PublishDate:yyyy-MM-dd} (Age: {GetAge()}) {NumberOfPages}");
+            Console.Write($"Book: {ID,9}  {Title,-25}  {Publisher,-20}{Creator,-20}{PublishDate:yyyy-MM-dd} (Age: {GetAge(),-3})  {NumberOfPages}");
         }
     }
 }

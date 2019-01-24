@@ -172,7 +172,7 @@ namespace Lab1
 
         public void Print()
         {
-            Console.Write($"Album:{ID,9}  {Title,-25}  {Publisher,-20}{Creator,-20}{PublishDate:yyyy-MM-dd} (Age: {GetAge()}) {RunLength,4}  {MediaType}");
+            Console.Write($"Album:{ID,9}  {Title,-25}  {Publisher,-20}{Creator,-20}{PublishDate:yyyy-MM-dd} (Age: {GetAge(),-3}) {RunLength,4}  {MediaType}");
         }
     }
 }
