@@ -111,7 +111,7 @@ namespace Lab1
             {               
                 DateTime.TryParse("1/1/1878", out DateTime earliestKnownMovie); 
 
-                if(DateTime.Compare(value, earliestKnownMovie) > 0) // Movie publish data is later than earliest known movie
+                if(DateTime.Compare(value, earliestKnownMovie) > 0 && DateTime.Compare(value, DateTime.Now) <0) // Movie publish data is later than earliest known movie and earlier than the current day
                 {
                     _PublishDate = value;
                 }
