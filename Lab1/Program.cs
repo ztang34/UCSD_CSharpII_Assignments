@@ -39,12 +39,13 @@ namespace Lab1
                         break;
                 }
                 PrintMediaDb();
+
+                Console.WriteLine();
+                Console.WriteLine("Press <ENTER> to continue...");
+                Console.ReadLine();
+
             } while (option != MainMenuOptions.Quit);
-
-            
-            Console.WriteLine("Press <ENTER> to quit...");
-            Console.ReadLine();
-
+                      
         }
 
         static void DisplayMenu()
@@ -58,6 +59,8 @@ namespace Lab1
 
         static void PrintMediaDb()
         {
+            Console.WriteLine();
+
             foreach (IMedia item in MediaDb)
             {
                 item.Print();
