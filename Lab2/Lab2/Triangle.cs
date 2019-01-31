@@ -16,7 +16,7 @@ namespace Lab2
             }
             set
             {
-                if (Vertices.Count != 3)
+                if (value.Count != 3)
                 {
                     throw new ArgumentException("Vertices", "Triangle can only have 3 vertices!");
                 }
