@@ -44,7 +44,7 @@ namespace Lab2
         {
             double perimeter = 0;
 
-            for (int i = 0; i< Vertices.Count; ++i)
+            for (int i = 0; i< Vertices.Count - 1; ++i)
             {
                 perimeter += Vertices[i].Distance(Vertices[i + 1]);
             }

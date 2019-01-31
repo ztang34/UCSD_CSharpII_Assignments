@@ -22,7 +22,7 @@ namespace Lab2
                 }
                 else
                 {
-                    Vertices = value;
+                    _Vertices = value;
                 }
 
             }
