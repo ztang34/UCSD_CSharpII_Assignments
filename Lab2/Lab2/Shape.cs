@@ -46,7 +46,7 @@ namespace Lab2
 
             for (int i = 0; i< Vertices.Count - 1; ++i)
             {
-                perimeter += Vertices[i].Distance(Vertices[i + 1]);
+                perimeter += Vertices[i].Distance(Vertices[i + 1]); //assume each vertice is adjacent
             }
 
             perimeter += Vertices[Vertices.Count - 1].Distance(Vertices[0]);

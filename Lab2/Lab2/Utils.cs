@@ -27,7 +27,8 @@ namespace Lab2
         {
             List<double> x = new List<double>();
             List<double> y = new List<double>();
-            foreach (Point pt in points)
+
+            foreach (Point pt in points) //Add X and Y coordinate of each point into separate list
             {
                 x.Add(pt.X);
                 y.Add(pt.Y);
