@@ -25,10 +25,18 @@ namespace Lab2
 
         public static Tuple<double, double, double, double> GetBoundingBox(List<Point> points)
         {
-            double minX = points.Min(point => point.X);
-            double maxX = points.Max(point => point.X);
-            double minY = points.Min(point => point.Y);
-            double maxY = points.Max(point => point.Y);
+            List<double> x = new List<double>();
+            List<double> y = new List<double>();
+
+            foreach (Point pt in points) //Add X and Y coordinate of each point into separate list
+            {
+                x.Add(pt.X);
+                y.Add(pt.Y);
+            }
+            double minX = x.Min();
+            double maxX = x.Max();
+            double minY = y.Min();
+            double maxY = y.Max();
 
             return new Tuple<double, double, double, double>(minX, minY, maxX, maxY);
         }
