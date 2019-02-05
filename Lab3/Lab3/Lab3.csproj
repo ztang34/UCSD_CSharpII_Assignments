@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Angle.cs" />
     <Compile Include="AngleUnits.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
