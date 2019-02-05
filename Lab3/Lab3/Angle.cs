@@ -8,6 +8,7 @@ namespace Lab3
 {
     public class Angle
     {
+        #region FieldsAndProperties
         public const decimal pi = 3.1415926535897932384626434M;
         public const decimal twoPi = 2M * pi;
         private decimal _Value = 0M;
@@ -39,7 +40,27 @@ namespace Lab3
                 _Units = value;
             }
         }
+        #endregion FieldsAndProperties
 
+        #region Constructor
+
+        public Angle () : this(0)
+        {
+        }
+
+        public Angle(Angle other) : this(other.Value, other.Units)
+        {
+
+        }
+        public Angle(decimal value, AngleUnits units = AngleUnits.Degrees)
+        {
+            Units = units;
+            Value = value;
+        }
+
+        #endregion Constructor
+
+        #region HelperMethods
         private static decimal Normalize(decimal value, AngleUnits units)
         {
             switch(units)
@@ -83,6 +104,44 @@ namespace Lab3
             return Normalize((angle * factor), toUnits); //Normalize converted angle 
         }
 
+        public Angle ToDegrees()
+        {
+            return new Angle(ConvertAngleValue(Value, Units, AngleUnits.Degrees), AngleUnits.Degrees);
+        }
+
+        public Angle ToGradians()
+        {
+            return new Angle(ConvertAngleValue(Value, Units, AngleUnits.Gradians), AngleUnits.Gradians);
+        }
+
+        public Angle ToRadians()
+        {
+            return new Angle(ConvertAngleValue(Value, Units, AngleUnits.Radians), AngleUnits.Radians);
+        }
+
+        public Angle ToTurns()
+        {
+            return new Angle(ConvertAngleValue(Value, Units, AngleUnits.Turns), AngleUnits.Turns);
+        }
+
+        public Angle ConvertAngle(AngleUnits targetUnits)
+        {
+            switch(targetUnits)
+            {
+                case AngleUnits.Degrees:
+                    return ToDegrees();
+                case AngleUnits.Radians:
+                    return ToRadians();
+                case AngleUnits.Gradians:
+                    return ToGradians();
+                case AngleUnits.Turns:
+                    return ToTurns();
+                default:
+                    return this; 
+            }
+        }
+
+        #endregion HelperMethods
 
 
     }
