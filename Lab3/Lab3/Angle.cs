@@ -143,6 +143,138 @@ namespace Lab3
 
         #endregion HelperMethods
 
+        #region MathematicalOperatorsOverload
+
+        public static Angle operator +(Angle a1, Angle a2)
+        {
+            return new Angle((a1.Value + Angle.ConvertAngleValue(a2.Value, a2.Units, a1.Units)), a1.Units);
+        }
+
+        public static Angle operator -(Angle a1, Angle a2)
+        {
+            return new Angle((a1.Value - Angle.ConvertAngleValue(a2.Value, a2.Units, a1.Units)), a1.Units);
+        }
+
+        public static Angle operator + (Angle a, decimal scalar)
+        {
+            return new Angle((a.Value + scalar), a.Units);
+        }
+
+        public static Angle operator -(Angle a, decimal scalar)
+        {
+            return new Angle((a.Value - scalar), a.Units);
+        }
+
+        public static Angle operator *(Angle a, decimal scalar)
+        {
+            return new Angle((a.Value * scalar), a.Units);
+        }
+
+        public static Angle operator /(Angle a, decimal scalar)
+        {
+            if (scalar == 0)
+            {
+                throw new DivideByZeroException("Cannot divide angle by a zero value");
+            }
+            else
+            {
+                return new Angle((a.Value / scalar), a.Units);
+            }
+        }
+
+        #endregion MathematicalOperatorsOverload
+
+        #region ComparisonOperatorsOverload
+
+        public static bool operator == (Angle a, Angle b)
+        {
+            object o1 = a;
+            object o2 = b;
+
+            if(o1 == null && o2 == null)
+            {
+                return true;
+            }
+            else if (o1 == null ^ o2 == null)
+            {
+                return false;
+            }
+            else
+            {
+                return a.Value.ApproximatelyEquals(Angle.ConvertAngleValue(b.Value, b.Units, a.Units));
+            }
+
+        }
+
+        public static bool operator !=(Angle a, Angle b)
+        {
+            return !(a == b);
+        }
+
+        public static bool operator < (Angle a, Angle b)
+        {
+            if (a == null && b == null)
+            {
+                return false;
+            }
+            else if (a == null)
+            {
+                return true;
+            }
+            else if (b == null)
+            {
+                return false;
+            }
+            else
+            {
+                return a.Value < Angle.ConvertAngleValue(b.Value, b.Units, a.Units);
+            }
+        }
+
+        public static bool operator > (Angle a, Angle b)
+        {
+            return !(a < b || a == b);
+        }
+
+        public static bool operator >= (Angle a, Angle b)
+        {
+            return (a > b || a == b);
+        }
+
+        public static bool operator <= (Angle a, Angle b)
+        {
+            return (a < b || a == b);
+        }
+
+        #endregion ComparisonOperatorsOverload
+
+        #region ObjectOverrides
+
+        public override bool Equals(object obj)
+        {
+            return (this == obj as Angle);
+        }
+
+        public override int GetHashCode()
+        {
+            return ConvertAngleValue(Value, Units, AngleUnits.Degrees).GetHashCode();
+        }
+        #endregion ObjectOverrides
+
+        #region ConversionOperators
+
+        public static explicit operator decimal(Angle a)
+        {
+            return a.Value;
+        }
+
+        public static explicit operator double (Angle a)
+        {
+            return (double)a.Value;
+        }
+
+        #endregion ConversionOperators
+
 
     }
 }
