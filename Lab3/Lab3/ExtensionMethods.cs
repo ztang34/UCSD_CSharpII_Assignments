@@ -35,7 +35,7 @@ namespace Lab3
             switch (units)
             {
                 case AngleUnits.Degrees:
-                    return "º";
+                    return "°";
                 case AngleUnits.Gradians:
                     return "g";
                 case AngleUnits.Radians:
