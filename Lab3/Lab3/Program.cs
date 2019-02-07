@@ -63,6 +63,8 @@ namespace Lab3
                 Console.WriteLine(a);
             }
 
+            
+
             Console.WriteLine("Press <Enter> to quit...");
             Console.ReadLine();
         }
