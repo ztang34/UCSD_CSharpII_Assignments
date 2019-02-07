@@ -77,7 +77,7 @@ namespace Lab3
 
         public string GetDecimalPlace(string format, char unit)
         {
-            if(String.IsNullOrEmpty(format) || String.IsNullOrWhiteSpace(format) || !char.IsDigit(format[1])) //invalid format code
+            if(String.IsNullOrEmpty(format) || String.IsNullOrWhiteSpace(format) || (format.Length >= 2 && !char.IsDigit(format[1]))) //invalid format code
             {
                 return "f2";
             }
