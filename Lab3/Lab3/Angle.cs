@@ -66,30 +66,30 @@ namespace Lab3
             switch(units)
             {
                 case AngleUnits.Degrees:
-                    if(value <0 || value >360)
+                    if(value < 0 || value > 360)
                     {
-                        int whole = (int)(value % 360);
-                        value -= whole * 360 * Math.Sign(value);
+                        value -= Math.Floor(value / 360) * 360;
                     }
                     return value;
+                   
                 case AngleUnits.Gradians:
                     if (value < 0 || value > 400)
                     {
-                        int whole = (int)(value % 400);
-                        value -= whole * 400 * Math.Sign(value);
+                        value -= Math.Floor(value / 400) * 400;
                     }
                     return value;
+
                 case AngleUnits.Radians:
                     if (value < 0 || value > twoPi)
                     {
-                        int whole = (int)(value % twoPi);
-                        value -= whole * 400 * Math.Sign(value);
+                        value -= Math.Floor(value / twoPi) * twoPi;
                     }
                     return value;
+
                 case AngleUnits.Turns:
                     if(value < 0 || value > 1)
                     {
-                        value -= (int)value * Math.Sign(value);
+                        value -= Math.Floor(value);
                     }
                     return value;
                 default:
