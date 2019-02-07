@@ -22,6 +22,10 @@ namespace Lab3
                 
                 if(String.IsNullOrWhiteSpace(format) || string.IsNullOrEmpty(format))
                 {
+                    if(a.Units == AngleUnits.Radians)
+                    {
+                        return a.Value.ToString("f5") + a.Units.ToSymbol();
+                    }
                     return a.Value.ToString("f2") + a.Units.ToSymbol();
                 }
                 else
@@ -39,7 +43,7 @@ namespace Lab3
                             return value.ToString(decimalPlace) + AngleUnits.Degrees.ToSymbol();
                         case 'g':
                             value = a.ToGradians().Value;
-                            return value.ToString(decimalPlace) + AngleUnits.Degrees.ToSymbol();
+                            return value.ToString(decimalPlace) + AngleUnits.Gradians.ToSymbol();
                         case 'p':
                             value = a.ToRadians().Value / (decimal)Math.PI;
                             return value.ToString(decimalPlace) + "π" + AngleUnits.Radians.ToSymbol();
