@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-    public class Angle
+    public class Angle: IFormattable
     {
         #region FieldsAndProperties
         public const decimal pi = 3.1415926535897932384626434M;
@@ -259,6 +259,8 @@ namespace Lab3
         {
             return ConvertAngleValue(Value, Units, AngleUnits.Degrees).GetHashCode();
         }
+
+        
         #endregion ObjectOverrides
 
         #region ConversionOperators
@@ -275,6 +277,22 @@ namespace Lab3
 
         #endregion ConversionOperators
 
+        #region StringMethods
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return new AngleFormatter().Format(format, this, formatProvider);
+        }
 
+        public string ToString(string format)
+        {
+            AngleFormatter fmt = new AngleFormatter();
+            return fmt.Format(format, this, fmt);
+        }
+
+        public override string ToString()
+        {
+            return String.Empty;
+        }
+        #endregion StringMethods
     }
 }
