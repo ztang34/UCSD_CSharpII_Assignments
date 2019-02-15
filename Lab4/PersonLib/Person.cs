@@ -8,10 +8,85 @@ namespace PersonLib
 {
     public class Person:ICloneable
     {
-        public int ID { get; private set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public DateTime DOB { get; set; }
+        private int _ID;
+        private DateTime _DOB;
+        private string _LastName;
+        private string _FirstName;
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+
+            private set
+            {
+                if (value > 0 && value < 999999999)
+                {
+                    _ID = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Valid SSN must be postive and less than 999999999");
+                }
+            }
+        }
+
+        public DateTime DOB
+        {
+            get
+            {
+                return _DOB;
+            }
+            set
+            {
+                if (value <= DateTime.Now )
+                {
+                    _DOB = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Date of birth cannot be in the future!");
+                }
+            }
+        }
+        public string LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                if(!String.IsNullOrEmpty(value))
+                {
+                    _LastName = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Last name cannot be blank!");
+                }
+            }
+        }
+        public string FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                if(!String.IsNullOrEmpty(value))
+                {
+                   _FirstName = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("First name cannot be blank!");
+                }
+            }
+        }
+       
 
         internal Person (int id, string lastName, string firstName, DateTime dob)
         {
@@ -43,7 +118,8 @@ namespace PersonLib
 
         public string GetFormattedID()
         {
-            string lastFourDigits = ID.ToString().Substring(ID.ToString().Length -4);
+            string SSN = $"{ID: 000000000}";
+            string lastFourDigits = SSN.Substring(6);
             return $"XXX-XX-{lastFourDigits}";
         }
 

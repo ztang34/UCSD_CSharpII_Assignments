@@ -28,7 +28,16 @@ namespace PersonLib
 
         public Person Create(int id, string lastName, string firstName, DateTime dob)
         {
-            return new Person(id, lastName, firstName, dob);
+            try
+            {
+                return new Person(id, lastName, firstName, dob);
+            }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            
         }
     }
 }

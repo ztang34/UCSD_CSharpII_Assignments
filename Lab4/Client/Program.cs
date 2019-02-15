@@ -22,13 +22,24 @@ namespace Client
             personList.Add(factory.Create(123456789, "May", "Theresa", DateTime.Parse("08 / 09 / 1959")));
 
             Person clonedPerson = personList[3].Clone() as Person;
-            clonedPerson.FirstName = "Dolly";
-            clonedPerson.LastName = "The Human";
-            clonedPerson.DOB = DateTime.Now;
+
+            try
+            {
+                clonedPerson.FirstName = "Dolly";
+                clonedPerson.LastName = "The Human";
+                clonedPerson.DOB = DateTime.Now;
+
+            }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
 
             personList.Add(clonedPerson);
 
             Console.WriteLine(Person.GetHeader());
+
             foreach(Person p in personList)
             {
                 Console.WriteLine(p);
