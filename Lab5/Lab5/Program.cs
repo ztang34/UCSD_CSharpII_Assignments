@@ -37,38 +37,55 @@ namespace Lab5
                 Console.WriteLine($"File {file} is being processed...");
                 stats.Documents.Add(file);
                 ++stats.DocumentCount;
-
-                using (StreamReader reader = File.OpenText(Path.Combine(filepath, file)))
+                
+                try
                 {
-                    do
+                    using (StreamReader reader = File.OpenText(Path.Combine(filepath, file)))
                     {
-                        string line = reader.ReadLine();
-                        string[] words = Split(line);
-
-                        foreach(string word in words)
+                        do
                         {
-                            if(stats.WordCounts.ContainsKey(word.ToLower()))
+                            string line = reader.ReadLine();
+                            string[] words = Split(line);
+
+                            foreach (string word in words)
                             {
-                                ++stats.WordCounts[word.ToLower()];
+                                if (stats.WordCounts.ContainsKey(word.ToLower()))
+                                {
+                                    ++stats.WordCounts[word.ToLower()];
+                                }
+                                else
+                                {
+                                    stats.WordCounts[word.ToLower()] = 1;
+                                }
                             }
-                            else
-                            {
-                                stats.WordCounts[word.ToLower()] = 1;
-                            }
-                        }
-                   } while (!reader.EndOfStream);
+                        } while (!reader.EndOfStream);
+                    }
                 }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"Cannot read file {file}:" + ex.Message);
+                }
+                
             }
         }
 
         private static void SerializeStats(string filepath, DocumentStatistics stats)
         {
             string file = Path.Combine(filepath, "stats.json");
-            using (FileStream stream = new FileStream(file, FileMode.Create, FileAccess.ReadWrite))
+
+            try
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DocumentStatistics));
-                serializer.WriteObject(stream, stats);
+                using (FileStream stream = new FileStream(file, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DocumentStatistics));
+                    serializer.WriteObject(stream, stats);
+                }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Cannot write to file stats.json:" + ex.Message);
+            }
+            
 
         }
 
