@@ -14,38 +14,25 @@ namespace Lab5
         static void Main(string[] args)
         {
             
-            string filePath = @"C:\Users\ztang\Desktop\Documents";
+            string filePath = @"C:\Users\robin\source\repos\UCSD_CSharpII_Assignments\Lab5\Lab5\Documents";
             DocumentStatistics stats = new DocumentStatistics();
             ProcessFiles(filePath, stats);
             Console.ReadLine();
             Console.WriteLine();
 
-            foreach(var item in stats.WordCounts)
-            {
-                Console.WriteLine($"{item.Key}: { item.Value}");
-            }
-
             Console.WriteLine("Start serialization...");
             SerializeStats(filePath, stats);
+            Console.WriteLine($"Serialization completes; Document statistics is written to {Path.Combine(filePath, "stats.json")}");
 
-            /*
-            string s = "\n";
-
-            
-            string[] words = Split(s);
-
-            foreach(string word in words)
-            {
-                Console.WriteLine(word);
-            }*/
-
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit...");
             Console.ReadLine();
 
         }
 
         private static void ProcessFiles(string filepath, DocumentStatistics stats)
         {
-            foreach (string file in Directory.GetFiles(filepath))
+            foreach (string file in Directory.GetFiles(filepath,"*.txt")) //only looking for text files
             {
                 Console.WriteLine($"File {file} is being processed...");
                 stats.Documents.Add(file);
@@ -76,8 +63,8 @@ namespace Lab5
 
         private static void SerializeStats(string filepath, DocumentStatistics stats)
         {
-            string file = Path.Combine(filepath, "DocumentStats.txt");
-            using (FileStream stream = new FileStream(file, FileMode.CreateNew, FileAccess.ReadWrite))
+            string file = Path.Combine(filepath, "stats.json");
+            using (FileStream stream = new FileStream(file, FileMode.Create, FileAccess.ReadWrite))
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DocumentStatistics));
                 serializer.WriteObject(stream, stats);
