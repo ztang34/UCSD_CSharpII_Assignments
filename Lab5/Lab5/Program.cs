@@ -14,7 +14,7 @@ namespace Lab5
         static void Main(string[] args)
         {
             
-            string filePath = @"C:\Users\robin\OneDrive\Desktop\UCSD\CSharp_II\Lesson5\Documents";
+            string filePath = @"C:\Users\ztang\Desktop\Documents";
             DocumentStatistics stats = new DocumentStatistics();
             ProcessFiles(filePath, stats);
             Console.ReadLine();
@@ -24,10 +24,14 @@ namespace Lab5
             {
                 Console.WriteLine($"{item.Key}: { item.Value}");
             }
-            
+
+            Console.WriteLine("Start serialization...");
+            SerializeStats(filePath, stats);
 
             /*
-            string s = "The ability to manipulate files is a feature common to most programming languages both present and past.  The term file refers to blocks of data stored on a variety of readable and/or writable media including, but not limited to: hard disks, flash drives, CD/DVD/Blu-ray optical discs and magnetic tape.  File I/O (Input/Output) is such an important feature in computer technology that the popular operating system DOS, from decades past, refers to file manipulation as part of its name Disk Operating System.  C# and the .NET Framework also considers file I/O to be a very important component for creating robust programs.  The System.IO namespace, where most IO types are defined, is part of the mscorlib library assembly so most C# programs will have access to this namespace by default.  All that you need to do is add the following using directive to the top of any code files that will make use of file I/O";
+            string s = "\n";
+
+            
             string[] words = Split(s);
 
             foreach(string word in words)
@@ -72,12 +76,18 @@ namespace Lab5
 
         private static void SerializeStats(string filepath, DocumentStatistics stats)
         {
+            string file = Path.Combine(filepath, "DocumentStats.txt");
+            using (FileStream stream = new FileStream(file, FileMode.CreateNew, FileAccess.ReadWrite))
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DocumentStatistics));
+                serializer.WriteObject(stream, stats);
+            }
 
         }
 
         private static string [] Split(string line)
         {
-            line = Regex.Replace(line, @"[():;.,]", " ");
+            line = Regex.Replace(line, @"[();.,]", "");
             string[] words = Regex.Split(line, @"\s+");
             return words;
         }
